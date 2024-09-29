@@ -1,138 +1,170 @@
-# Using Git for Your Arcade Game Project
 
-For the arcade game project, you will be doing group development.
-Therefore, we'll be asking you to use a source control system called
-git.  You've already used git to checkout code/homework from the
-CSSE220 repo, but for this project you will be managing a repo.
-
-# A video walk through of this process can be found here:
-
-[Video walkthrough](https://rose-hulman.hosted.panopto.com/Panopto/Pages/Viewer.aspx?id=b91558fb-1f30-4269-b6d5-abaf015fb139)
+# GEM: Genetic Evolutionary Modelling
 
 
-# Step 0: Create a github account (if needed)
 
-1. Go to: https://github.com/join
-2. Create an account with the following username: rhit-student
-3. Be sure to replace "student" with your Rose-Hulman username.
+## Overview
+**GEM (Genetic Evolutionary Modelling)** is an advanced simulation framework designed to replicate and study the principles of natural evolution through computational methods. The project utilizes genetic algorithms (GA) to model complex evolutionary systems, making it a powerful tool for optimization, research, and machine learning applications.
 
-# Step 1: Accepting the github assignment
+GEM allows users to explore evolutionary computation, optimizing solutions to complex problems through mutation, crossover, and selection mechanisms. It's suitable for fields such as computational biology, artificial intelligence, algorithmic trading, and automated system design.
 
-1. Check your email for a link to accept a github assignment from your professor
-2. It will look something like this:  https://classroom.github.com/g/xyzabc
-3. Click "Authorize github"
-4. Join the team name defined by your instructor (or create one with the correct name, i.e. S22_A_101 )
+## Table of Contents
+- [Features](#features)
+- [Core Algorithms](#core-algorithms)
+- [Installation](#installation)
+- [Usage](#usage)
+- [Project Structure](#project-structure)
+- [License](#license)
+- [Contributing](#contributing)
+- [Contact](#contact)
+
+## Features
+- **Genetic Algorithm Framework**: Implements core genetic algorithms (mutation, crossover, selection) that can be customized for various use cases.
+- **Chromosome Encoding**: Supports binary, integer, and real-value encoded chromosomes.
+- **Fitness Function Optimization**: Users can define custom fitness functions to suit different problem domains.
+- **Selection Algorithms**: Provides different selection techniques, including roulette wheel selection, tournament selection, and rank selection.
+- **Crossover Operators**: Includes single-point, two-point, and uniform crossover methods for recombination of chromosomes.
+- **Mutation Operators**: Supports both bit-flip mutation (for binary encoding) and Gaussian mutation (for real-valued genes).
+- **Multi-threading Support**: Speeds up simulations by utilizing multi-threaded processing.
+- **Visualization Tools**: Includes Python scripts for visualizing fitness progression over generations.
+
+## Core Algorithms
+
+### 1. Genetic Algorithm (GA)
+The core of GEM is built around a classic genetic algorithm (GA) structure, which evolves a population of candidate solutions to optimize a fitness function.
+
+- **Population Initialization**: The algorithm starts by creating a random population of candidate solutions (chromosomes). Chromosomes can be encoded in different formats depending on the problem (e.g., binary strings, integer arrays).
+
+#### Selection
+- **Roulette Wheel Selection**: Candidates are selected for reproduction with probabilities proportional to their fitness scores.
+- **Tournament Selection**: A set of candidates is chosen at random, and the best-performing candidate is selected for reproduction.
+- **Rank Selection**: Candidates are ranked by fitness, and their selection probability is based on their rank.
+
+#### Crossover Operators
+- **Single-Point Crossover**: A crossover point is selected randomly, and the genes from two parent chromosomes are swapped after that point.
+- **Two-Point Crossover**: Two crossover points are selected, and the genes between the two points are swapped.
+- **Uniform Crossover**: Each gene is swapped between two parents with a fixed probability.
+
+#### Mutation Operators
+- **Bit-Flip Mutation (Binary Chromosomes)**: Each gene has a small probability of being flipped (0 to 1 or vice versa).
+- **Gaussian Mutation (Real-Valued Chromosomes)**: For real-valued genes, small random values are added, drawn from a Gaussian distribution.
+
+#### Fitness Evaluation
+The fitness function is problem-dependent and evaluates how well each candidate solution performs in relation to the optimization goal.
+
+- **Elitism**: A technique where the best individuals are guaranteed to survive to the next generation, ensuring that the highest fitness is not lost.
+
+### 2. Advanced Selection Mechanisms
+- **Rank-Based Selection**: Candidates are ranked, and their selection probability is based on their rank, which reduces the impact of large differences in fitness.
+- **Fitness-Proportionate Selection (Roulette Wheel)**: Candidates with higher fitness are more likely to be selected, but with a chance for lower-fitness candidates to reproduce, maintaining genetic diversity.
+
+### 3. Customizable Fitness Functions
+You can define various fitness functions for different types of optimization problems. Common examples include:
+- **Minimization of Error**: In machine learning or optimization tasks, the fitness function could minimize an error metric, such as mean squared error.
+- **Maximization of Utility**: In trading systems, the goal might be to maximize profit, where the fitness is proportional to the return on investment.
+- **Constraint Satisfaction**: In scheduling or packing problems, the fitness function could reward solutions that meet all constraints.
+
+### 4. Chromosome Representations
+The GEM framework supports various chromosome encodings:
+- **Binary Encoding**: Suitable for combinatorial optimization problems (e.g., knapsack problem, TSP).
+- **Integer Encoding**: Used for problems where the solution space consists of integers (e.g., job scheduling).
+- **Real-Value Encoding**: Useful for problems requiring continuous variables, such as function optimization.
+
+## Installation
+
+### Prerequisites
+- **Java 8 or higher** (Main Application)
+- **Git** (Version Control)
+- **Python 3.x** (Optional for visualization tools)
+- **Maven** (If you want to manage dependencies)
+
+### Clone the Repository
+```bash
+git clone https://github.com/khattam/GEM-Genetic-Evolution-Modelling.git
+cd GEM-Genetic-Evolution-Modelling
+```
 
 
-# Step 2: Cloning the Repo
+# Build the Project
 
-This step should be done by everyone in your team.
+If you are using Maven:
 
-1. In your browser, at the top of this page, you should find a green 
-button you can use to copy the URI of this project to your clipboard.
+```bash
+mvn clean install
+```
 
-[Cloning out repo screenshot](https://github.com/RHIT-CSSE/csse220/blob/master/Docs/misc/checkout_repo.png)
+Alternatively, you can use your IDE to directly import and build the project.
 
-2. Open your Eclipse and go to File > Import > Git > Projects from Git
-3. Select "Clone URI"
-4. It should automatically get filled out for you, but if not, in the 
-   URI field paste the URL you took from the website.  Host and
-   repository path should get filled out for you.
-5. In Authentication, enter your GITHUB username and password (you might find it
-   convenient to have it save these for you) and hit Next
-6. In branch selection make sure master is checked and click next
-7. In local destination, you can configure anywhere you like *except*
-   the directories that your existing CSSE220 repos are being checked
-   out to
-8. Select "Import existing eclipse projects" and select next.
-9. You should see "ArcadeGameGit-00" on the list, make sure it's checked
-   and select next
-10. You should see a folder for ArcadeGameGit-00 in your project browser
+## Usage
+After setting up the project, you can start running evolutionary simulations by executing the main class. Below is a basic example of how to run a simulation with custom parameters.
 
-# Step 3: Test Push and Pull
+### Example Command:
 
-Have *one* member of your team make a change and push it.  Here's how:
+```bash
+java -jar GEM.jar --population 200 --generations 500 --mutation-rate 0.05 --crossover-rate 0.7
+```
 
-1.  In eclipse, rename your project to have your team name instead of ArcadeGameGit-00.
-    Right Click on ArcadeGameGit-00 then Refactor->Rename:
+### Parameters:
+- **--population**: The number of chromosomes in each generation.
+- **--generations**: The number of generations to evolve.
+- **--mutation-rate**: The probability of mutation occurring for each gene in a chromosome.
+- **--crossover-rate**: The likelihood of performing crossover during reproduction.
 
-[Renaming repo step 1 screenshot](https://github.com/RHIT-CSSE/csse220/blob/master/Docs/misc/RenameProjectRefactoringStep1.png)
+## Example Python Script for Visualization:
+If you want to visualize how fitness improves over generations, you can use the following Python script:
 
-[Renaming repo step 2 screenshot](https://github.com/RHIT-CSSE/csse220/blob/master/Docs/misc/RenameProjectRefactoringStep2.png)
+```python
+import matplotlib.pyplot as plt
 
-2.  Right click on the project folder and select Team > Commit
-3.  Verify that .project appears in your list of "Staged Changes"
-4.  Also add the .gitignore to your staged changes (if not already) by selecting it and
-    clicking +
-5.  Add some text in the commit message
-6.  Select Commit and push
+# Data: generations vs average fitness
+generations = [1, 2, 3, ..., 500]
+avg_fitness = [0.2, 0.25, 0.3, ..., 0.9]
 
-Have *everyone else* on your team pull the latest version
+plt.plot(generations, avg_fitness)
+plt.xlabel('Generations')
+plt.ylabel('Average Fitness')
+plt.title('Fitness Progression Over Generations')
+plt.show()
+```
 
-1. Right click on the project folder and select Team > Pull
-2. You might have to enter your GITHUB username and password
-3. You should get the updated files
+## Project Structure
 
-# Step 4: Cause a Merge Conflict
+```bash
+GEM-Genetic-Evolution-Modelling/
+├── src/                     # Source files for the application
+│   ├── mainApp/             # Main Java classes
+│   ├── Population.java      # Class handling population structure
+│   ├── Chromosome.java      # Class defining a chromosome and its genes
+│   ├── Selection.java       # Class defining selection algorithms
+│   ├── Crossover.java       # Class for implementing crossover mechanisms
+│   ├── Mutation.java        # Class defining mutation operators
+├── ChromosomeFiles/         # Chromosome representations
+├── grading_rubrics/         # Miscellaneous files from initial development
+├── milestones/              # Project milestones and notes
+├── README.md                # This README file
+└── .gitignore               # Git ignore file for untracked files
+```
 
-Have *everyone* in your team
+## License
 
-1. Edit the same line of code in a different way.  Say add your name
-   to the println.
-2. Attempt to commit and push.
-3. The first person who does it should succeed.  The rest should get
-   a "rejected non-fast-forward" error.
+This project is licensed under the MIT License. See the LICENSE file for details.
 
-For one of those those who failed: 
+## Contributing
 
-1. Right click on the project folder and select team > Pull
-2. You should see a message about conflict and things will look sort
-   of scary
-3. Look at the edited file.  You should see that both versions of the
-   code are there plus some <<<<< ===== >>>> lines
-4. Figure out what the *combination* of the changes ought to be
-   (probably all your names in the println) and edit the file to be
-   correct, deleting all unnecessary stuff
-5. Test your code and make sure that everything works as expected
-6. Right click on the project folder and select Team > Commit
-7. Manually move all your files into "Staged changes" with the +
-8. Commit and push
-9. Now have the original committer pull and they should have the
-    merged version too
-10. If they are any other members of year team, have them do step 4
-    onward
-    
-# Step 5: Let's do this
+We welcome contributions to the GEM project. To contribute:
 
-You have the basics!
+1. Fork the repository.
+2. Create a new branch (`git checkout -b feature-branch`).
+3. Make your changes.
+4. Commit your changes (`git commit -m 'Add some feature'`).
+5. Push to the branch (`git push origin feature-branch`).
+6. Create a new Pull Request.
 
-0. Do this only if you already have some version of coding running.
-1. Have the team member who has the latest version of your source code
-   copy all the files into ArcadeGameGit-**
-   (hint: you can select files in the eclipse package explored and use
-   right click copy and paste)
-2. Test and verify that the game runs in its new project
-3. Stage all the files, and then commit and push them
-4. Have everyone else pull the changes
-5. Verify that everyone has a running up to date game on their eclipse
+For major changes, please open an issue first to discuss what you would like to change.
 
-Done!
+## Contact
 
-# Good Advice for Minimal Merge Conflicts
+Feel free to reach out if you have any questions or ideas!
 
-* [Pair program whenever possible](https://rose-hulman.hosted.panopto.com/Panopto/Pages/Viewer.aspx?id=ddab27fc-a8a4-4cd0-a8f8-abaf013a3f22)
-* Always do a Team Pull before you begin programming
-* Always to a Team Commit/Push when you finish
-* In Eclipse: Right Click -> Replace With -> HEAD Revision is a nice way to remove 
-  your local changes before doing a Team->Pull if you don't care about
-  the local version of your code and just want to get your partner's version
-* If you do have to resolve a merge conflict, remember you must
-  accommodate *both* changes 
-
-# Git bash
-
-* A more advanced and full feature program can be used to use [Git for Windows](https://gitforwindows.org/)
-* MacOS and Linux have terminal/consoles that can interact with git natively
-* There might be times when using these toola will be easier than Eclipse alone
-* You are welcome to install it, but in most cases it should not be required
-* More about git: [git-handbook](https://guides.github.com/introduction/git-handbook/)
+- Email: khattam@example.com
+- GitHub: @khattam
