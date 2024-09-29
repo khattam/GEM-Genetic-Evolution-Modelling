@@ -166,5 +166,5 @@ For major changes, please open an issue first to discuss what you would like to 
 
 Feel free to reach out if you have any questions or ideas!
 
-- Email: khattam@example.com
+- Email: khattam@rose-hulman.com
 - GitHub: @khattam
